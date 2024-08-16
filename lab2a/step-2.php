@@ -5,16 +5,21 @@ require "helpers/helper-functions.php";
 session_start();
 
 $fullname = $_POST['fullname'];
-$email = $_POST['email'];
+$birthdate = $_POST['birthdate'];
+//$email = $_POST['email'];
 # Encrypt the password first before saving it to the Session Variables
-$password = $_POST['password'];
-$passwordHash = password_hash($password, PASSWORD_DEFAULT);
-
-
+//$password = $_POST['password'];
+//$passwordHash = password_hash($password, PASSWORD_DEFAULT);
+$formattedBirthdate = date("F j, Y", strtotime($birthdate));
+$contact_number = $_POST['contact_number'];
+$sex = $_POST['sex'];
 
 $_SESSION['fullname'] = $fullname;
-$_SESSION['email'] = $email;
-$_SESSION['password'] = $passwordHash;
+$_SESSION['birthdate'] = $formattedBirthdate;
+$_SESSION['contact_number'] = $contact_number;
+$_SESSION['sex'] = $sex;
+//$_SESSION['email'] = $email;
+//$_SESSION['password'] = $passwordHash;
 
 dump_session();
 
@@ -42,16 +47,18 @@ dump_session();
         <form action="step-3.php" method="POST">
 
           <fieldset>
-            <label>Birthdate</label>
-            <input type="date" name="birthdate" required>
+          
+            
 
-            <label>Sex</label>
-            <br />
-            <input type="radio" name="sex" value="male" checked="checked" required>Male
-            <br />
-            <input type="radio" name="sex" value="female" required>Female
-            <br />
-
+            <label>Program</label>
+            <select name="program" required>
+              <option disabled="disabled" selected="">Select an option</option>
+              <option value="cs">Computer Science</option>
+              <option value="it">Information Technology</option>
+              <option value="is">Information Systems</option>
+              <option value="se">Software Engineering</option>
+              <option value="ds">Data Science</option>
+            </select>
             <label>Complete Address</label>
             <textarea name="address" rows="3"></textarea>
 

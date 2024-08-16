@@ -1,6 +1,7 @@
 <?php
 
-define('CUSTOMERS_FILE_PATH', 'customers-100.csv');
+$time_start = microtime(true);
+define('CUSTOMERS_FILE_PATH', 'customers-100000.csv');
 
 function get_hundred_customers_data()
 {
@@ -30,8 +31,14 @@ function get_hundred_customers_data()
     ];
 }
 
+
+
 $customers = get_hundred_customers_data();
 
+$time_end = microtime(true);
+$time = $time_end - $time_start;
+
+echo "Time: $time seconds\n";
 ?>
 <html>
 <head>

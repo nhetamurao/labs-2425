@@ -4,15 +4,18 @@ require "helpers/helper-functions.php";
 
 session_start();
 
-$birthdate = $_POST['birthdate'];
-$sex = $_POST['sex'];
+
+$program = $_POST['program'];
+//$birthdate = $_POST['birthdate'];
+//$sex = $_POST['sex'];
 $address = $_POST['address'];
-$formattedBirthdate = date("F j, Y", strtotime($birthdate));
-
-$_SESSION['birthdate'] = $formattedBirthdate;
-
-$_SESSION['sex'] = $sex;
+//$formattedBirthdate = date("F j, Y", strtotime($birthdate));
+//$_SESSION['birthdate'] = $formattedBirthdate;
+//$_SESSION['sex'] = $sex;
+$_SESSION['program'] = $program;
 $_SESSION['address'] = $address;
+
+
 
 dump_session();
 ?>
@@ -39,18 +42,18 @@ dump_session();
         <form action="thank-you.php" method="POST">
 
           <fieldset>
-            <label>Contact Number</label>
-            <input type="text" name="contact_number" placeholder="+639123456789" />
+            
 
-            <label>Program</label>
-            <select name="program" required>
-              <option disabled="disabled" selected="">Select an option</option>
-              <option value="cs">Computer Science</option>
-              <option value="it">Information Technology</option>
-              <option value="is">Information Systems</option>
-              <option value="se">Software Engineering</option>
-              <option value="ds">Data Science</option>
-            </select>
+            
+
+
+            <label>Email address</label>
+            <input type="email" name="email" placeholder="example@canonical.com" autocomplete="email" required>
+
+            <label>Password</label>
+            <input type="password" name="password" placeholder="******" autocomplete="current-password" required>
+
+
 
             <label class="p-checkbox--inline">
             <input type="checkbox" name="agree" required>

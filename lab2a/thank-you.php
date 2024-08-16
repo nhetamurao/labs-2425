@@ -3,30 +3,47 @@
 require "helpers/helper-functions.php";
 
 session_start();
-
-$contact_number = $_POST['contact_number'];
-$program = $_POST['program'];
+$email = $_POST['email'];
+$password = $_POST['password'];
+$passwordHash = password_hash($password, PASSWORD_DEFAULT);
 $agree = $_POST['agree'];
 
-$_SESSION['contact_number'] = $contact_number;
-$_SESSION['program'] = $program;
+$_SESSION['email'] = $email;
+$_SESSION['password'] = $passwordHash;
 $_SESSION['agree'] = $agree;
 
-$form_data = $_SESSION;
+$data = $_SESSION;
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+ $file = fopen("registrations.csv", "a");
+
+
+ fputcsv($file, $data);
+
+  // Close the file
+  fclose($file);
+}
 
 // Calculate the age based on the birthdate
 function calculateAge($birthdate) {
-    $birthDate = new DateTime($birthdate);
-    $currentDate = new DateTime();
-    $age = $birthDate->diff($currentDate)->y;
-    return $age;
+  $birthDate = new DateTime($birthdate);
+  $currentDate = new DateTime();
+  $age = $birthDate->diff($currentDate)->y;
+  return $age;
 }
 
 $age = calculateAge($_SESSION['birthdate']);
 
+$_SESSION['age'] = $age;
+
+$form_data = $_SESSION;
+
 dump_session();
 
-session_destroy();
+
+
+
 ?>
 <html>
 <head>
@@ -67,10 +84,7 @@ session_destroy();
             <?php
             endforeach;
             ?>
-                <tr>
-                    <th>Age</th>
-                    <td><?php echo $age; ?></td>
-                </tr>
+
             </tbody>
         </table>
 
