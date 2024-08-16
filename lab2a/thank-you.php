@@ -14,6 +14,16 @@ $_SESSION['agree'] = $agree;
 
 $form_data = $_SESSION;
 
+// Calculate the age based on the birthdate
+function calculateAge($birthdate) {
+    $birthDate = new DateTime($birthdate);
+    $currentDate = new DateTime();
+    $age = $birthDate->diff($currentDate)->y;
+    return $age;
+}
+
+$age = calculateAge($_SESSION['birthdate']);
+
 dump_session();
 
 session_destroy();
@@ -23,7 +33,7 @@ session_destroy();
     <meta charset="utf-8">
     <title>IPT10 Laboratory Activity #2</title>
     <link rel="icon" href="https://phpsandbox.io/assets/img/brand/phpsandbox.png">
-    <link rel="stylesheet" href="https://assets.ubuntu.com/v1/vanilla-framework-version-4.15.0.min.css" />   
+    <link rel="stylesheet" href="https://assets.ubuntu.com/v1/vanilla-framework-version-4.15.0.min.css" />
 </head>
 <body>
 
@@ -36,7 +46,7 @@ session_destroy();
         </h1>
       </div>
       <div class="p-section--shallow">
-      
+
         <table aria-label="Session Data">
             <thead>
                 <tr>
@@ -57,9 +67,13 @@ session_destroy();
             <?php
             endforeach;
             ?>
+                <tr>
+                    <th>Age</th>
+                    <td><?php echo $age; ?></td>
+                </tr>
             </tbody>
         </table>
-      
+
 
       </div>
     </div>

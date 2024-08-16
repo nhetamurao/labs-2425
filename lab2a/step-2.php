@@ -8,10 +8,13 @@ $fullname = $_POST['fullname'];
 $email = $_POST['email'];
 # Encrypt the password first before saving it to the Session Variables
 $password = $_POST['password'];
+$passwordHash = password_hash($password, PASSWORD_DEFAULT);
+
+
 
 $_SESSION['fullname'] = $fullname;
 $_SESSION['email'] = $email;
-$_SESSION['password'] = $password;
+$_SESSION['password'] = $passwordHash;
 
 dump_session();
 
@@ -40,13 +43,13 @@ dump_session();
 
           <fieldset>
             <label>Birthdate</label>
-            <input type="date" name="birthdate">
+            <input type="date" name="birthdate" required>
 
             <label>Sex</label>
             <br />
-            <input type="radio" name="sex" value="male" checked="checked">Male
+            <input type="radio" name="sex" value="male" checked="checked" required>Male
             <br />
-            <input type="radio" name="sex" value="female">Female
+            <input type="radio" name="sex" value="female" required>Female
             <br />
 
             <label>Complete Address</label>
