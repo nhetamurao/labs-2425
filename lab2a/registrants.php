@@ -9,22 +9,20 @@ $file = fopen("registrations.csv", "r");
     <title>Registrants List</title>
     <link rel="stylesheet" href="https://assets.ubuntu.com/v1/vanilla-framework-version-4.15.0.min.css" />
     <style>
-        <style>
         table {
-            width: 80%; 
-            height: 400px; 
+            width: auto; 
+            margin: 0 auto; 
             border-collapse: collapse;
-            margin: 1 auto; 
         }
         th, td {
+            border: 1px solid #ddd;
             padding: 8px;
             text-align: left;
+            word-wrap: break-word; 
         }
         th {
-            background-color: #f2f2f2;
+            background-color: #f4f4f4;
         }
-
-    </style>
     </style>
 </head>
 <body>
